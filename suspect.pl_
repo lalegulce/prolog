@@ -1,0 +1,65 @@
+man(yunus).
+
+man(mehmet).
+
+man(ali).
+
+woman(zeynep).
+
+woman(nelin).
+
+woman(elif).
+
+person(X):-woman(X).
+
+person(X):-man(X).
+
+location(kitchen).
+
+location(diningroom).
+
+location(studyroom).
+
+location(bathroom).
+
+location(pantry).
+
+location(livingroom).
+
+instrument(hammer).
+
+instrument(knife).
+
+instrument(handsaw).
+
+instrument(chemical).
+
+instrument(gun).
+
+instrument(weldingmachine).
+
+uniq_ppl(A,B,C,D,E,F):- person(A), person(B), person(C), person(D), person(E), person(F),  \+A=B, \+A=C, \+A=D, \+A=E, \+A=F, \+B=C, \+B=D, \+B=E, \+B=F, \+C=D, \+C=E, \+C=F, \+D=E, \+D=F, \+E=F.
+
+clue1(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- man(Kitchen),\+Kitchen=Knife, \+Kitchen=Hammer, \+Kitchen=Weldingmachine, \+Kitchen=Gun.
+
+clue2(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- elif=Bathroom,zeynep=Studyroom.
+
+clue2(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):-elif=Studyroom,zeynep=Bathroom.
+
+clue3(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- \+Hammer=Bathroom,\+Hammer=Diningroom,\+elif=Hammer,\+ali=Hammer.
+
+clue4(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):-woman(Weldingmachine), Weldingmachine=Studyroom.
+
+clue5(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- Livingroom=Mehmet.
+
+clue5(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):-Livingroom=Ali.
+
+clue6(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- \+Knife=Diningroom.
+
+clue7(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- \+zeynep=Pantry,\+zeynep=Studyroom.
+
+assert((clue8(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine):- Gun=ali)).
+
+assert((suspect(X):-uniq_ppl(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom),uniq_ppl(Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue1(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue2(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue3(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue4(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue5(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue6(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue7(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),clue8(Kitchen,Diningroom,Pantry,Bathroom,Livingroom,Studyroom,Hammer,Knife,Handsaw,Chemical,Gun,Weldingmachine),X=Handsaw, X=Pantry, write("my suspect is: "), write(X))).
+
+suspect(X).
