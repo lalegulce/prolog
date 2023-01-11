@@ -1,2 +1,2 @@
 # prolog
-Prolog homework
+AI suspect algorithm
